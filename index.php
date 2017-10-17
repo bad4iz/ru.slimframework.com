@@ -42,7 +42,7 @@
 
       <div class="col-md-8 docs-content">
         <div class="edit-panel" style="margin: 0 0 1em 0;">
-          <a href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/start/upgrade.md" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-github"></i> Edit This Page</a>
+          <a href="bad4iz/ru.slimframework.com/docs/start/upgrade.md" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-github"></i> Edit This Page</a>
         </div>
        <?
 

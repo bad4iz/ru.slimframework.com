@@ -1,3 +1,11 @@
+<?
+ require_once "vendor/autoload.php";
+  $Parsedown = new Parsedown();
+
+  $page = file_get_contents('./md/index.md');
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +41,15 @@
       </div>
 
       <div class="col-md-8 docs-content">
-       <? include_once "./start/home.php" ?>
+        <div class="edit-panel" style="margin: 0 0 1em 0;">
+          <a href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/start/upgrade.md" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-github"></i> Edit This Page</a>
+        </div>
+       <?
+
+
+       echo $Parsedown->text($page);
+
+       include_once "./start/home.php" ?>
       </div>
 
     </div>

@@ -8,7 +8,7 @@
 <div class="alert alert-info">
   <p>
     Эта документация предназначена для <strong>Slim 3</strong>. Документацию по Slim 2 можно найти на <a
-      href="http://docs.slimframework.com/">docs.slimframework.com</a>.
+            href="http://docs.slimframework.com/">docs.slimframework.com</a>.
   </p>
 </div>
 
@@ -44,7 +44,7 @@
 </blockquote>
 
 <p>You don’t always need a kitchen-sink solution like <a href="http://symfony.com/">Symfony</a> or <a
-    href="http://laravel.com/">Laravel</a>.
+          href="http://laravel.com/">Laravel</a>.
   These are great tools, for sure. But they are often overkill. Instead, Slim
   provides only a minimal set of tools that do what you need and nothing else.</p>
 
@@ -66,28 +66,29 @@
   <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="c1">// Create and configure Slim app
 </span><span class="nv">$config</span> <span class="o">=</span> <span class="p">[</span><span
-          class="s1">'settings'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                class="s1">'settings'</span> <span class="o">=&gt;</span> <span class="p">[</span>
     <span class="s1">'addContentLengthHeader'</span> <span class="o">=&gt;</span> <span class="kc">false</span><span
-          class="p">,</span>
+                class="p">,</span>
 <span class="p">]];</span>
 <span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span
-          class="p">(</span><span class="nv">$config</span><span class="p">);</span>
+                class="p">(</span><span class="nv">$config</span><span class="p">);</span>
 
 <span class="c1">// Define app routes
 </span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span
-          class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span
-          class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span
-          class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span
-          class="p">{</span>
+                class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span
+                class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span
+                class="nv">$response</span><span
+                class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span
+                class="p">{</span>
     <span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span
-          class="na">write</span><span class="p">(</span><span class="s2">"Hello "</span> <span
-          class="o">.</span> <span class="nv">$args</span><span class="p">[</span><span
-          class="s1">'name'</span><span class="p">]);</span>
+                class="na">write</span><span class="p">(</span><span class="s2">"Hello "</span> <span
+                class="o">.</span> <span class="nv">$args</span><span class="p">[</span><span
+                class="s1">'name'</span><span class="p">]);</span>
 <span class="p">});</span>
 
 <span class="c1">// Run app
 </span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span
-          class="p">();</span></code></pre>
+                class="p">();</span></code></pre>
   </figure>
 
   <figcaption>Figure 1: Example Slim application</figcaption>
@@ -109,7 +110,7 @@
 
 <p>Slim is designed to play well with other PHP components, too. You can register
   additional first-party components such as <a href="https://github.com/slimphp/Slim-Csrf/">Slim-Csrf</a>, <a
-    href="https://github.com/slimphp/Slim-HttpCache">Slim-HttpCache</a>,
+          href="https://github.com/slimphp/Slim-HttpCache">Slim-HttpCache</a>,
   or <a href="https://github.com/slimphp/Slim-Flash">Slim-Flash</a> that build upon Slim’s default
   functionality. It’s also
   easy to integrate third-party components found on <a href="https://packagist.org/">Packagist</a>.</p>

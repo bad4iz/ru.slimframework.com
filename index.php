@@ -1,8 +1,20 @@
 <?
- require_once "vendor/autoload.php";
-  $Parsedown = new Parsedown();
+require_once "vendor/autoload.php";
+$Parsedown = new Parsedown();
 
-  $page = file_get_contents('./md/index.md');
+$title = '';
+$page = '';
+$routes = $_SERVER['REQUEST_URI'];
+if ($routes) {
+  $file = './md' . $routes . '.md';
+
+  $pageTmp = file_get_contents($file);
+  $pos = strpos($pageTmp, '---', 10);
+  $page = substr($pageTmp, $pos + 3);
+
+  $titleTmp = substr($pageTmp, 0, $pos);
+  $title = explode("title:", $titleTmp)[1];
+}
 
 
 ?>
@@ -20,8 +32,8 @@
   <meta property="og:url" content="http://www.slimframework.com/docs/"/>
   <meta property="og:description" content=""/>
   <meta property="og:type" content="website"/>
-  <link rel="stylesheet" href="./assets/css/all.css"/>
-  <link rel="shortcut icon" href="./assets/images/favicon.png"/>
+  <link rel="stylesheet" href="/assets/css/all.css"/>
+  <link rel="shortcut icon" href="/assets/images/favicon.png"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 </head>
 <body style="padding-top: 5em">
@@ -40,16 +52,14 @@
         <? require_once "./sidebar.php" ?>
       </div>
 
+      <h1><?= $title; ?></h1>
+      <hr/>
       <div class="col-md-8 docs-content">
         <div class="edit-panel" style="margin: 0 0 1em 0;">
-          <a href="bad4iz/ru.slimframework.com/docs/start/upgrade.md" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-github"></i> Edit This Page</a>
+          <a href="bad4iz/ru.slimframework.com/docs/start/<? $file ?>" target="_blank" class="btn btn-default btn-xs"><i
+                    class="fa fa-github"></i> редактировать страницу </a>
         </div>
-       <?
-
-
-       echo $Parsedown->text($page);
-
-       include_once "./start/home.php" ?>
+        <?= $Parsedown->text($page); ?>
       </div>
 
     </div>

@@ -36,19 +36,19 @@
 <ul class="toc-links">
 
 
-  <li><a href="index.php">Home</a></li>
+  <li><a href="/index">Home</a></li>
 
 
-  <li><a href="start/installation.html">Installation</a></li>
+  <li><a href="/start/installation">Installation</a></li>
 
 
-  <li><a href="start/upgrade.html">Upgrade Guide</a></li>
+  <li><a href="/start/upgrade">Upgrade Guide</a></li>
 
 
-  <li><a href="start/web-servers.html">Web Servers</a></li>
+  <li><a href="/start/web-servers">Web Servers</a></li>
 
 
-  <li><a href="deployment/deployment.html">Deployment</a></li>
+  <li><a href="/deployment/deployment">Deployment</a></li>
 
 </ul>
 

@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <title>Action-Domain-Responder with Slim - Slim Framework</title>
+        <meta name="description" content=""/>
+        <meta name="robots" content="index, follow"/>
+        <meta property="og:title" content="Action-Domain-Responder with Slim"/>
+        <meta property="og:site_name" content="Slim Framework"/>
+        <meta property="og:url" content="http://www.slimframework.com/docs/cookbook/action-domain-responder.html"/>
+        <meta property="og:description" content=""/>
+        <meta property="og:type" content="website"/>
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link rel="stylesheet" href="../../assets/css/all.css"/>
+        <link rel="shortcut icon" href="../../assets/images/favicon.png"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <script src="https://use.typekit.net/yjz4fyo.js"></script>
+        <script>try{Typekit.load();}catch(e){}</script>
+        <script>
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-19430723-1']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </head>
+    <body style="padding-top: 5em">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../../index.html"><img src="../../assets/images/favicon.png" height="24px" alt="Slim"/></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="../../blog.html">Blog</a></li>
+                        <li class="active"><a href="../../docs.html">User Guide</a></li>
+                        <li><a href="http://discourse.slimframework.com/">Support</a></li>
+                        <li><a href="../../contribute.html">Contribute</a></li>
+                        <li><a href="https://www.stickermule.com/user/1070648464/stickers" target="_blank"><i class="fa fa-heart"></i> Goodies</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        <header class="site-header">
+            <div class="site-title"><a href="../../index.html">Slim</a></div>
+            <div class="site-slogan">a micro framework for PHP</div>
+        </header>
+
+        <div class="row">
+            <div class="col-md-3">
+                <form novalidate="novalidate" onsubmit="return false;" class="searchbox" style="visibility:hidden;height:0">
+                    <div role="search" class="searchbox__wrapper">
+                        <input id="docsearch" type="search" name="search" placeholder="Search in the doc" autocomplete="off" required="required" class="searchbox__input">
+                        <button type="submit" title="Submit your search query." class="searchbox__submit" >
+                            <svg role="img" aria-label="Search">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-search-13"></use>
+                            </svg>
+                        </button>
+                        <button type="reset" title="Clear the search query." class="searchbox__reset hide">
+                            <svg role="img" aria-label="Reset">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-clear-3"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="svg-icons" style="height: 0; width: 0; position: absolute; visibility: hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                        <symbol id="sbx-icon-clear-3" viewBox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"/></symbol>
+                        <symbol id="sbx-icon-search-13" viewBox="0 0 40 40"><path d="M26.806 29.012a16.312 16.312 0 0 1-10.427 3.746C7.332 32.758 0 25.425 0 16.378 0 7.334 7.333 0 16.38 0c9.045 0 16.378 7.333 16.378 16.38 0 3.96-1.406 7.593-3.746 10.426L39.547 37.34c.607.608.61 1.59-.004 2.203a1.56 1.56 0 0 1-2.202.004L26.807 29.012zm-10.427.627c7.322 0 13.26-5.938 13.26-13.26 0-7.324-5.938-13.26-13.26-13.26-7.324 0-13.26 5.936-13.26 13.26 0 7.322 5.936 13.26 13.26 13.26z" fill-rule="evenodd"/></symbol>
+                    </svg>
+                </div>
+
+                
+                    
+                    
+                    <h3 class="toc-title">Get Started</h3>
+                    <ul class="toc-links">
+                        
+                            
+                            <li><a href="../index.html">Home</a></li>
+                        
+                            
+                            <li><a href="../start/installation.html">Installation</a></li>
+                        
+                            
+                            <li><a href="../start/upgrade.html">Upgrade Guide</a></li>
+                        
+                            
+                            <li><a href="../start/web-servers.html">Web Servers</a></li>
+                        
+                            
+                            <li><a href="../deployment/deployment.html">Deployment</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Tutorial</h3>
+                    <ul class="toc-links">
+                        
+                            
+                            <li><a href="../tutorial/first-app.html">First Application</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Concepts</h3>
+                    <ul class="toc-links">
+                        
+                            
+                            <li><a href="../concepts/value-objects.html">PSR 7</a></li>
+                        
+                            
+                            <li><a href="../concepts/middleware.html">Middleware</a></li>
+                        
+                            
+                            <li><a href="../concepts/di.html">Dependency Container</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">The Application</h3>
+                    <ul class="toc-links">
+                        
+                            
+                            <li><a href="../objects/application.html">Overview</a></li>
+                        
+                            
+                            <li><a href="../objects/application.html#application-configuration">Configuration</a></li>
+                        
+                            
+                            <li><a href="../objects/application.html#slim-default-settings">Default settings</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">The Request</h3>
+                    <ul class="toc-links">
+                        
+                            
+                            <li><a href="../objects/request.html">Overview</a></li>
+                        
+                            
+                            <li><a href="../objects/request.html#the-request-method">Method</a></li>
+                        
+                            
+                            <li><a href="../objects/request.html#the-request-headers">Headers</a></li>
+                        
+                            
+                            <li><a href="../objects/request.html#the-request-body">Body</a></li>
+                        
+                            
+                            <li><a href="../objects/request.html#uploaded-files">Uploaded Files</a></li>
+                        
+                            
+                            <li><a href="../objects/request.html#request-helpers">Helpers</a></li>
+                        
+                            
+                            <li><a href="../objects/request.html#route-object">Route object</a></li>
+                        
+                            
+                            <li><a href="../objects/request.html#media-type-parsers">Media type parsers</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">The Response</h3>
+                    <ul class="toc-links">
+                        
+                            
+                            <li><a href="../objects/response.html">Overview</a></li>
+                        
+                            
+                            <li><a href="../objects/response.html#the-response-status">Status</a></li>
+                        
+                            
+                            <li><a href="../objects/response.html#the-response-headers">Headers</a></li>
+                        
+                            
+                            <li><a href="../objects/response.html#the-response-body">Body</a></li>
+                        
+                            
+                            <li><a href="../objects/response.html#returning-json">JSON</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Routing</h3>
+                    <ul class="toc-links">
+                        
+                            
+                            <li><a href="../objects/router.html">Overview</a></li>
+                        
+                            
+                            <li><a href="../objects/router.html#how-to-create-routes">Create Routes</a></li>
+                        
+                            
+                            <li><a href="../objects/router.html#route-callbacks">Callbacks</a></li>
+                        
+                            
+                            <li><a href="../objects/router.html#route-strategies">Strategies</a></li>
+                        
+                            
+                            <li><a href="../objects/router.html#route-placeholders">Placeholders</a></li>
+                        
+                            
+                            <li><a href="../objects/router.html#route-names">Names</a></li>
+                        
+                            
+                            <li><a href="../objects/router.html#route-groups">Groups</a></li>
+                        
+                            
+                            <li><a href="../objects/router.html#route-middleware">Middleware</a></li>
+                        
+                            
+                            <li><a href="../objects/router.html#container-resolution">Container Resolution</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Error Handling</h3>
+                    <ul class="toc-links">
+                        
+                            
+                            <li><a href="../handlers/error.html">Error Handlers</a></li>
+                        
+                            
+                            <li><a href="../handlers/not-found.html">404 Not Found</a></li>
+                        
+                            
+                            <li><a href="../handlers/not-allowed.html">405 Not Allowed</a></li>
+                        
+                            
+                            <li><a href="../handlers/php-error.html">PHP Runtime Error</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title active">Cook book</h3>
+                    <ul class="toc-links">
+                        
+                            
+                            <li><a href="route-patterns.html">Trailing / in routes</a></li>
+                        
+                            
+                            <li><a href="ip-address.html">Retrieving IP address</a></li>
+                        
+                            
+                            <li><a href="retrieving-current-route.html">Retrieving Current Route</a></li>
+                        
+                            
+                            <li><a href="database-eloquent.html">Using Eloquent with Slim</a></li>
+                        
+                            
+                            <li><a href="enable-cors.html">Enabling CORS</a></li>
+                        
+                            
+                            <li><a href="environment.html">Getting and Mocking the Environment</a></li>
+                        
+                            
+                            <li><a href="uploading-files.html">Uploading Files using POST forms</a></li>
+                        
+                            
+                            <li><a href="action-domain-responder.html">Action-Domain-Responder with Slim</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Add Ons</h3>
+                    <ul class="toc-links">
+                        
+                            
+                            <li><a href="../features/templates.html">Templates</a></li>
+                        
+                            
+                            <li><a href="../features/caching.html">HTTP Caching</a></li>
+                        
+                            
+                            <li><a href="../features/csrf.html">CSRF Protection</a></li>
+                        
+                            
+                            <li><a href="../features/flash.html">Flash Messages</a></li>
+                        
+                            
+                            <li><a href="https://github.com/slimphp/Slim/wiki/Middleware-for-Slim-Framework-v3.x/">3rd Party</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Contributing</h3>
+                    <ul class="toc-links">
+                        
+                            
+                            <li><a href="../contributors/strategy.html">Branching Strategy</a></li>
+                        
+                            
+                            <li><a href="../contributors/guidelines.html">Guidelines</a></li>
+                        
+                    </ul>
+                
+            </div>
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header">Action-Domain-Responder with Slim</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/cookbook/action-domain-responder.md" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-github"></i> Edit This Page</a>
+                </div>
+                <p>In this post, I’ll show how to refactor the Slim tutorial application to more closely follow the <a href="http://pmjones.io/adr">Action-Domain-Responder</a> pattern.</p>
+
+<p>One nice thing about Slim (and most other <a href="http://paul-m-jones.com/archives/6627">HTTP user interface frameworks</a>) is that they are already “action” oriented. That is, their routers do not presume a controller class with many action methods. Instead, they presume an action closure or a single-action invokable class.</p>
+
+<p>So the Action part of Action-Domain-Responder already exists for Slim. All that is needed is to pull extraneous bits out of the Actions, to more clearly separate the Action behaviors from Domain and the Responder behaviors.</p>
+
+<h2 id="extract-domain">Extract Domain</h2>
+
+<p>Let’s begin by extracting the Domain logic. In the original tutorial, the Actions use two data-source mappers directly, and embed some business logic as well. We can create a Service Layer class called <code class="highlighter-rouge">TicketService</code> and move those operations from the Actions into the Domain. Doing so gives us this class:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">class TicketService
+{
+    protected $ticket_mapper;
+    protected $component_mapper;
+
+    public function __construct(
+        TicketMapper $ticket_mapper,
+        ComponentMapper $component_mapper
+    ) {
+        $this-&gt;ticket_mapper = $ticket_mapper;
+        $this-&gt;component_mapper = $component_mapper;
+    }
+
+    public function getTickets()
+    {
+        return $this-&gt;ticket_mapper-&gt;getTickets();
+    }
+
+    public function getComponents()
+    {
+        return $this-&gt;component_mapper-&gt;getComponents();
+    }
+
+    public function getTicketById($ticket_id)
+    {
+        $ticket_id = (int) $ticket_id;
+        return $this-&gt;ticket_mapper-&gt;getTicketById($ticket_id);
+    }
+
+    public function createTicket($data)
+    {
+        $component_id = (int) $data['component'];
+        $component = $this-&gt;component_mapper-&gt;getComponentById($component_id);
+
+        $ticket_data = [];
+        $ticket_data['title'] = filter_var($data['title'], FILTER_SANITIZE_STRING);
+        $ticket_data['description'] = filter_var($data['description'], FILTER_SANITIZE_STRING);
+        $ticket_data['component'] = $component-&gt;getName();
+
+        $ticket = new TicketEntity($ticket_data);
+        $this-&gt;ticket_mapper-&gt;save($ticket);
+        return $ticket;
+    }
+}</code></pre></figure>
+
+<p>We create a container object for it in <code class="highlighter-rouge">index.php</code> like so:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$container['ticket_service'] = function ($c) {
+    return new TicketService(
+        new TicketMapper($c['db']),
+        new ComponentMapper($c['db'])
+    );
+};</code></pre></figure>
+
+<p>And now the Actions can use the <code class="highlighter-rouge">TicketService</code> instead of performing domain logic directly:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$app-&gt;get('/tickets', function (Request $request, Response $response) {
+    $this-&gt;logger-&gt;addInfo("Ticket list");
+    $tickets = $this-&gt;ticket_service-&gt;getTickets();
+    $response = $this-&gt;view-&gt;render(
+        $response,
+        "tickets.phtml",
+        ["tickets" =&gt; $tickets, "router" =&gt; $this-&gt;router]
+    );
+    return $response;
+});
+
+$app-&gt;get('/ticket/new', function (Request $request, Response $response) {
+    $components = $this-&gt;ticket_service-&gt;getComponents();
+    $response = $this-&gt;view-&gt;render(
+        $response,
+        "ticketadd.phtml",
+        ["components" =&gt; $components]
+    );
+    return $response;
+});
+
+$app-&gt;post('/ticket/new', function (Request $request, Response $response) {
+    $data = $request-&gt;getParsedBody();
+    $this-&gt;ticket_service-&gt;createTicket($data);
+    $response = $response-&gt;withRedirect("/tickets");
+    return $response;
+});
+
+$app-&gt;get('/ticket/{id}', function (Request $request, Response $response, $args) {
+    $ticket = $this-&gt;ticket_service-&gt;getTicketById($args['id']);
+    $response = $this-&gt;view-&gt;render(
+        $response,
+        "ticketdetail.phtml",
+        ["ticket" =&gt; $ticket]
+    );
+    return $response;
+})-&gt;setName('ticket-detail');</code></pre></figure>
+
+<p>One benefit here is that we can now test the domain activities separately from the actions. We can begin to do something more like integration testing, even unit testing, instead of end-to-end system testing.</p>
+
+<h2 id="extract-responder">Extract Responder</h2>
+
+<p>In the case of the tutorial application, the presentation work is so straightforward as to not require a separate Responder for each action. A relaxed variation of a Responder layer is perfectly suitable in this simple case, one where each Action uses a different method on a common Responder.</p>
+
+<p>Extracting the presentation work to a separate Responder, so that response-building is completely removed from the Action, looks like this:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">use Psr\Http\Message\ResponseInterface as Response;
+use Slim\Views\PhpRenderer;
+
+class TicketResponder
+{
+    protected $view;
+
+    public function __construct(PhpRenderer $view)
+    {
+        $this-&gt;view = $view;
+    }
+
+    public function index(Response $response, array $data)
+    {
+        return $this-&gt;view-&gt;render(
+            $response,
+            "tickets.phtml",
+            $data
+        );
+    }
+
+    public function detail(Response $response, array $data)
+    {
+        return $this-&gt;view-&gt;render(
+            $response,
+            "ticketdetail.phtml",
+            $data
+        );
+    }
+
+    public function add(Response $response, array $data)
+    {
+        return $this-&gt;view-&gt;render(
+            $response,
+            "ticketadd.phtml",
+            $data
+        );
+    }
+
+    public function create(Response $response)
+    {
+        return $response-&gt;withRedirect("/tickets");
+    }
+}</code></pre></figure>
+
+<p>We can then add the <code class="highlighter-rouge">TicketResponder</code> object to the container in <code class="highlighter-rouge">index.php</code>:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$container['ticket_responder'] = function ($c) {
+    return new TicketResponder($c['view']);
+};</code></pre></figure>
+
+<p>And finally we can refer to the Responder, instead of just the template system, in the Actions:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$app-&gt;get('/tickets', function (Request $request, Response $response) {
+    $this-&gt;logger-&gt;addInfo("Ticket list");
+    $tickets = $this-&gt;ticket_service-&gt;getTickets();
+    return $this-&gt;ticket_responder-&gt;index(
+        $response,
+        ["tickets" =&gt; $tickets, "router" =&gt; $this-&gt;router]
+    );
+});
+
+$app-&gt;get('/ticket/new', function (Request $request, Response $response) {
+    $components = $this-&gt;ticket_service-&gt;getComponents();
+    return $this-&gt;ticket_responder-&gt;add(
+        $response,
+        ["components" =&gt; $components]
+    );
+});
+
+$app-&gt;post('/ticket/new', function (Request $request, Response $response) {
+    $data = $request-&gt;getParsedBody();
+    $this-&gt;ticket_service-&gt;createTicket($data);
+    return $this-&gt;ticket_responder-&gt;create($response);
+});
+
+$app-&gt;get('/ticket/{id}', function (Request $request, Response $response, $args) {
+    $ticket = $this-&gt;ticket_service-&gt;getTicketById($args['id']);
+    return $this-&gt;ticket_responder-&gt;detail(
+        $response,
+        ["ticket" =&gt; $ticket]
+    );
+})-&gt;setName('ticket-detail');</code></pre></figure>
+
+<p>Now we can test the response-building work separately from the domain work.</p>
+
+<p>Some notes:</p>
+
+<p>Putting all the response-building in a single class with multiple methods, especially for simple cases like this tutorial, is fine to start with. For ADR, is not strictly necessary to have one Responder for each Action. What <em>is</em> necessary is to extract the response-building concerns out of the Action.</p>
+
+<p>But as the presentation logic complexity increases (content-type negotiation? status headers? etc.), and as dependencies become different for each kind of response being built, you will want to have a Responder for each Action.</p>
+
+<p>Alternatively, you might stick with a single Responder, but reduce its interface to a single method. In that case, you may find that using a <a href="http://paul-m-jones.com/archives/6043">Domain Payload</a> (instead of “naked” domain results) has some significant benefits.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>At this point, the Slim tutorial application has been converted to ADR. We have separated the domain logic to a <code class="highlighter-rouge">TicketService</code>, and the presentation logic to a <code class="highlighter-rouge">TicketResponder</code>. And it’s easy to see how each Action does pretty much the same thing:</p>
+
+<ul>
+  <li>Marshals input and passes it into the Domain</li>
+  <li>Gets back a result from the Domain and passes it to the Responder</li>
+  <li>Invokes the Responder so it can build and return the Response</li>
+</ul>
+
+<p>Now, for a simple case like this, using ADR (or even webbishy MVC) might seem like overkill. But simple cases become complex quickly, and this simple case shows how the ADR separation-of-concerns can be applied as a Slim-based application increases in complexity.</p>
+
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="uploading-files.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Cook book: </small> Uploading Files using POST forms</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="../features/templates.html" rel="next"><small>Add Ons: </small> Templates <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <footer class="site-footer">
+            <p>
+                Created and maintained by <br/>
+                <a href="http://joshlockhart.com">Josh Lockhart</a>,
+                <a href="http://www.silentworks.co.uk" target="_blank">Andrew Smith</a>,
+                <a href="http://akrabat.com/" target="_blank">Rob Allen</a>, and the
+                <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+            </p>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="margin: 0; padding-top: 20px">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="9YRVXHRZT6H3L">
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
+        </footer>
+    </div>
+</div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="../../assets/scripts/build/production.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+        <script>
+        docsearch({
+          apiKey: 'b6e6f2d1ae81c64677b6192755f83a6e',
+          indexName: 'slimframework',
+          inputSelector: '#docsearch'
+        });
+        </script>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </body>
+</html>
+

@@ -1,7 +1,7 @@
 <?php
 ?>
 <p>Перевод
-  <a href="">bad4iz</a>
+  <a href="https://github.com/bad4iz">bad4iz</a>
 </p>
 <p>
   Созданный и поддерживаемый  <br/>
